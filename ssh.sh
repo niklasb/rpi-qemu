@@ -1,2 +1,2 @@
 #!/bin/bash
-ssh pi@localhost -p 5022
+ssh pi@localhost -p 5022 "$@"
