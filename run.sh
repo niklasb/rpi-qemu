@@ -10,7 +10,7 @@ if ! sudo iptables -L -n | grep $SSH_PORT; then
 fi
 
 # We should use
-# -netdev user,id=user.0 -device e1000,netdev=user.0
+# -netdev user,id=user.0,hostfwd=tcp:127.0.0.1:$SSH_PORT-:22 -device ???,netdev=user.0
 # But I don't know what device to use. The guest OS reports
 # that a SMC91C11xFD controller is implicitly used, but I can't figure out how
 # to select it explicitly, so that we can use  -netdev and -device
