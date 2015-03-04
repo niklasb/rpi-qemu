@@ -1,8 +1,8 @@
 #!/bin/bash
+set -x
 #wget http://xecdesign.com/downloads/linux-qemu/kernel-qemu
 wget http://downloads.raspberrypi.org/raspbian_latest
 unzip raspbian_latest && rm raspbian_latest
-set -x
 loopdev=`sudo losetup -f`
 img=`echo *.img`
 offset=`file $img | grep -oh 'startsector [^,]*' | tail -n 1 | cut -d' ' -f2`
