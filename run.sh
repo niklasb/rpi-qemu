@@ -9,6 +9,8 @@ if ! sudo iptables -L -n | grep $SSH_PORT; then
   sudo iptables -A INPUT -p tcp --dport $SSH_PORT -j DROP
 fi
 
+echo Booting system, log in as user pi with password raspberry
+
 # We should use
 # -netdev user,id=user.0,hostfwd=tcp:127.0.0.1:$SSH_PORT-:22 -device ???,netdev=user.0
 # But I don't know what device to use. The guest OS reports
@@ -22,5 +24,6 @@ qemu-system-arm \
   -M versatilepb \
   -no-reboot \
   -serial stdio \
-  -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" \
+  -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw console=ttyAMA0" \
+  -nographic -monitor /dev/null \
   -hda *.img
