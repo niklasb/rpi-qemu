@@ -1,12 +1,15 @@
 #!/bin/bash
-set -x
+set -x -e
+
 #wget http://xecdesign.com/downloads/linux-qemu/kernel-qemu
-wget http://downloads.raspberrypi.org/raspbian_latest
-unzip raspbian_latest && rm raspbian_latest
+
+wget downloads.raspberrypi.org/raspbian/images/raspbian-2015-02-17/2015-02-16-raspbian-wheezy.zip
+unzip 2015-02-16-raspbian-wheezy.zip && rm 2015-02-16-raspbian-wheezy.zip
+
 loopdev=`sudo losetup -f`
 img=`echo *.img`
-offset=`file $img | grep -oh 'startsector [^,]*' | tail -n 1 | cut -d' ' -f2`
-offset=$(($offset*512))
+offset=62914560
+echo $offset
 mntdir=mnt
 sudo mkdir -p $mntdir
 sudo chown root:root $mntdir
